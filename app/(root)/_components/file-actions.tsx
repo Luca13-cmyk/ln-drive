@@ -71,7 +71,7 @@ export function FileCardActions({
       });
       if (deleteForever) {
         toast({
-          variant: "destructive",
+          variant: "default",
           title: "File was removed successfully!",
         });
       } else {
