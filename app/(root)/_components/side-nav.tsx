@@ -76,7 +76,10 @@ const Sidebar = () => {
                 );
               })}
               <li className="flex-center flex-col cursor-pointer gap-2 p-4">
-                <OrganizationSwitcher />
+                <OrganizationSwitcher
+                  createOrganizationMode="navigation"
+                  afterCreateOrganizationUrl="/dashboard/files"
+                />
               </li>
             </ul>
           </SignedIn>

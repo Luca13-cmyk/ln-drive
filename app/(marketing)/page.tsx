@@ -1,10 +1,29 @@
+"use client";
+
 import { Button } from "@/components/ui/button";
+import { Spinner } from "@/components/ui/spinner";
 import { SignedIn, SignInButton, SignedOut } from "@clerk/nextjs";
+import { useConvexAuth } from "convex/react";
 
 import Image from "next/image";
 import Link from "next/link";
+import { redirect } from "next/navigation";
 
 export default function LandingPage() {
+  const { isAuthenticated, isLoading } = useConvexAuth();
+
+  if (isLoading) {
+    return (
+      <div className="h-screen w-screen flex items-center justify-center">
+        <Spinner size="lg" />
+      </div>
+    );
+  }
+
+  if (isAuthenticated) {
+    return redirect("/dashboard/files");
+  }
+
   return (
     <div className="bg-white">
       <div className="relative isolate px-6 pt-14 lg:px-8">
@@ -31,12 +50,12 @@ export default function LandingPage() {
             />
 
             <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">
-              The easiest way to upload and share files with your company or
-              friends.
+              O jeito mais fácil de enviar e compartilhar arquivos entre
+              organizações e amigos.
             </h1>
             <p className="mt-6 text-lg leading-8 text-gray-600">
-              Make an account and start managing your files in less than a
-              minute.
+              Crie uma conta ou entre para começar a gerenciar seus arquivos em
+              menos de 1 minuto.
             </p>
             <div className="mt-10 flex items-center justify-center gap-x-6">
               <SignedOut>
@@ -56,7 +75,7 @@ export default function LandingPage() {
                     href="/dashboard/files"
                     className="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                   >
-                    Get started
+                    Começar
                   </Link>
                 </>
               </SignedIn>
@@ -64,7 +83,7 @@ export default function LandingPage() {
                 href="#"
                 className="text-sm font-semibold leading-6 text-gray-900"
               >
-                Learn more <span aria-hidden="true">→</span>
+                Saiba mais <span aria-hidden="true">→</span>
               </a>
             </div>
           </div>

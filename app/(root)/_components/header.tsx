@@ -1,5 +1,4 @@
 "use client";
-import MobileNav from "@/app/(root)/_components/mobile-nav";
 
 import { useScrollTop } from "@/hooks/use-scroll-top";
 import { cn } from "@/lib/utils";
@@ -18,9 +17,12 @@ export function Header() {
       <div className="flex items-center container mx-auto justify-between w-full">
         <div className="flex justify-between w-full">
           <SignedIn>
-            <OrganizationSwitcher />
+            <OrganizationSwitcher
+              createOrganizationMode="navigation"
+              afterCreateOrganizationUrl="/dashboard/files"
+            />
 
-            <MobileNav />
+            {/* <MobileNav /> */}
             <div className="hidden xl:block">
               <UserButton showName afterSignOutUrl="/" />
             </div>

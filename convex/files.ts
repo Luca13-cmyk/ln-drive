@@ -162,6 +162,23 @@ export const getFiles = query({
   },
 });
 
+export const getFileId = query({
+  args: {
+    fileId: v.id("files"),
+  },
+  async handler(ctx, args) {
+    const access = await hasAccessToFile(ctx, args.fileId);
+
+    if (!access) {
+      throw new ConvexError("no access to file");
+    }
+
+    const file = await ctx.db.get(args.fileId);
+
+    return file;
+  },
+});
+
 export const restoreFile = mutation({
   args: { fileId: v.id("files") },
   async handler(ctx, args) {

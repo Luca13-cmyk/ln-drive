@@ -19,6 +19,7 @@ export const typeIcons = {
 
 export const typeLargeIcons = {
   pdf: <FileTextIcon className="h-20 w-20" />,
+
   csv: <GanttChartIcon className="h-20 w-20" />,
   text: <Text className="h-20 w-20" />,
   xlsx: <TextQuote className="h-20 w-20" />,

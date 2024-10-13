@@ -7,9 +7,9 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import {
-  BrainCircuit,
   Crop,
-  FileIcon,
+  Download,
+  File,
   Loader2,
   MoreVertical,
   StarHalf,
@@ -36,6 +36,9 @@ import { api } from "@/convex/_generated/api";
 import { Doc } from "@/convex/_generated/dataModel";
 import { useEdgeStore } from "@/lib/edgestore";
 
+import { usePdf } from "@/hooks/use-pdf";
+import { useRouter } from "next/navigation";
+
 export function FileCardActions({
   file,
   isFavorited,
@@ -51,6 +54,9 @@ export function FileCardActions({
   const me = useQuery(api.users.getMe);
   const { edgestore } = useEdgeStore();
   const [isConfirmOpen, setIsConfirmOpen] = useState(false);
+  const router = useRouter();
+
+  const pdfModal = usePdf();
 
   const handleDeleteFile = async ({
     deleteForever,
@@ -72,20 +78,20 @@ export function FileCardActions({
       if (deleteForever) {
         toast({
           variant: "default",
-          title: "File was removed successfully!",
+          title: "Arquivo foi removido com sucesso!",
         });
       } else {
         toast({
           variant: "default",
-          title: "File marked for deletion",
-          description: "Your file will be deleted soon",
+          title: "Arquivo movido para lixeira",
+          description: "Seu arquivo vai ser removido em breve",
         });
       }
     } catch (error) {
       toast({
         variant: "destructive",
-        title: "Try again",
-        description: "Failed to move to trash",
+        title: "Tente de novo",
+        description: "Erro ao mover para a lixeira",
       });
     } finally {
       setIsDeleting(false);
@@ -97,20 +103,21 @@ export function FileCardActions({
       <AlertDialog open={isConfirmOpen} onOpenChange={setIsConfirmOpen}>
         <AlertDialogContent>
           <AlertDialogHeader>
-            <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+            <AlertDialogTitle>Tem certeza?</AlertDialogTitle>
             <AlertDialogDescription>
-              This action will mark the file for our deletion process. Files are
-              deleted periodically
+              Essa ação irá mover seu arquivo a lixeira. A lixeira tem o
+              processo de apagar arquivos automaticamente depois de um certo
+              tempo.
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
-            <AlertDialogCancel>Cancel</AlertDialogCancel>
+            <AlertDialogCancel>Cancelar</AlertDialogCancel>
             <AlertDialogAction
               className="bg-yellow-600 hover:bg-yellow-500"
               disabled={isDeleting}
               onClick={() => handleDeleteFile({ deleteForever: false })}
             >
-              Trash
+              Lixeira
             </AlertDialogAction>
             <AlertDialogAction
               className="bg-red-600 hover:bg-red-500"
@@ -120,10 +127,10 @@ export function FileCardActions({
               {isDeleting ? (
                 <>
                   <Loader2 className="animate-spin text-white" />
-                  <p className="ml-2">Deleting...</p>
+                  <p className="ml-2">Apagando...</p>
                 </>
               ) : (
-                <p>Delete now</p>
+                <p>Apagar agora</p>
               )}
             </AlertDialogAction>
           </AlertDialogFooter>
@@ -141,7 +148,7 @@ export function FileCardActions({
             }}
             className="flex gap-1 items-center cursor-pointer"
           >
-            <FileIcon className="w-4 h-4" /> Download
+            <Download className="w-4 h-4" /> Download
           </DropdownMenuItem>
           {file.type === "image" && (
             <DropdownMenuItem
@@ -156,11 +163,11 @@ export function FileCardActions({
           {file.type === "pdf" && (
             <DropdownMenuItem
               onClick={() => {
-                window.open("https://quill-hazel.vercel.app", "_blank");
+                router.push(`/file/${file._id}`);
               }}
               className="flex gap-1 items-center cursor-pointer"
             >
-              <BrainCircuit className="w-4 h-4" /> Quill
+              <File className="w-4 h-4" /> Abrir
             </DropdownMenuItem>
           )}
 
@@ -175,11 +182,11 @@ export function FileCardActions({
           >
             {isFavorited ? (
               <div className="flex gap-1 items-center">
-                <StarIcon className="w-4 h-4" /> Unfavorite
+                <StarIcon className="w-4 h-4" /> Desfavoritar
               </div>
             ) : (
               <div className="flex gap-1 items-center">
-                <StarHalf className="w-4 h-4" /> Favorite
+                <StarHalf className="w-4 h-4" /> Favoritar
               </div>
             )}
           </DropdownMenuItem>
@@ -209,11 +216,11 @@ export function FileCardActions({
             >
               {file.shouldDelete ? (
                 <div className="flex gap-1 text-green-600 items-center cursor-pointer">
-                  <UndoIcon className="w-4 h-4" /> Restore
+                  <UndoIcon className="w-4 h-4" /> Restaurar
                 </div>
               ) : (
                 <div className="flex gap-1 text-red-600 items-center cursor-pointer">
-                  <TrashIcon className="w-4 h-4" /> Delete
+                  <TrashIcon className="w-4 h-4" /> Lixeira
                 </div>
               )}
             </DropdownMenuItem>

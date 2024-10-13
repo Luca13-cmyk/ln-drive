@@ -16,7 +16,7 @@ export function SearchBar() {
       size="sm"
     >
       <SearchIcon className="h-4 w-4" />
-      <p>Search</p>
+      <p>Buscar</p>
     </Button>
   );
 }
