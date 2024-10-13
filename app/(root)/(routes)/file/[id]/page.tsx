@@ -12,7 +12,7 @@ interface PageProps {
   };
 }
 
-const page = ({ params }: PageProps) => {
+const Page = ({ params }: PageProps) => {
   const file = useQuery(api.files.getFileId, {
     fileId: params.id,
   });
@@ -44,4 +44,4 @@ const page = ({ params }: PageProps) => {
   );
 };
 
-export default page;
+export default Page;
