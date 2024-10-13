@@ -144,11 +144,11 @@ const FileBrowser = ({
             </TabsTrigger>
             <TabsTrigger value="table" className="flex gap-2 items-center">
               <Rows4Icon />
-              Table
+              Tabela
             </TabsTrigger>
           </TabsList>
           <div className="flex gap-2 items-center ">
-            <Label htmlFor="type-select ">Type Filter</Label>
+            <Label htmlFor="type-select ">Filtrar por</Label>
             <Select
               value={type}
               onValueChange={(newType) => {
@@ -159,7 +159,7 @@ const FileBrowser = ({
                 <SelectValue />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="all">All</SelectItem>
+                <SelectItem value="all">Todos</SelectItem>
                 {acceptedFilesFilter.map((acceptedFile, i) => (
                   <SelectItem key={`${acceptedFile}-${i}`} value={acceptedFile}>
                     {acceptedFile}
@@ -228,7 +228,7 @@ const FileBrowser = ({
               ) : (
                 <>
                   <PlusCircle className="h-4 w-4 mr-2" />
-                  <p>Load more</p>
+                  <p>Carregar +</p>
                 </>
               )}
             </Button>

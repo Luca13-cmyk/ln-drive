@@ -174,14 +174,22 @@
 .header {
   @apply flex-between xl:hidden;
 }
+.header_bottom_nav {
+  @apply fixed bottom-0 left-0 flex flex-row w-full items-center justify-between bg-white/65 rounded-lg
+}
 
 .header-nav_elements {
   @apply mt-8 flex w-full flex-col items-start gap-5;
 }
 
+.header-bottom_nav_elements {
+  @apply flex flex-row w-full items-center justify-around bg-white/65 rounded-lg;
+}
+
+
 /* Sidebar Component */
 .sidebar {
-  @apply hidden h-screen w-72 bg-white lg:bg-transparent rounded-md p-5 shadow-md shadow-purple-200/50 xl:flex sticky top-0 left-0  z-10;
+  @apply hidden h-[70vh] w-72 bg-white lg:bg-transparent rounded-md p-5 shadow-md shadow-purple-200/50 xl:flex sticky top-0 left-0  z-10;
 }
 
 .sidebar-logo {

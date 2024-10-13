@@ -8,20 +8,20 @@ export const navLinks = [
   },
 
   {
-    label: "Favorites",
+    label: "Favoritos",
     route: "/dashboard/favorites",
     icon: "/assets/icons/stars.svg",
   },
   {
-    label: "Trash",
+    label: "Lixeira",
     route: "/dashboard/trash",
     icon: "/assets/icons/scan.svg",
   },
-  {
-    label: "Profile",
-    route: "/dashboard/profile",
-    icon: "/assets/icons/profile.svg",
-  },
+  // {
+  //   label: "Profile",
+  //   route: "/dashboard/profile",
+  //   icon: "/assets/icons/profile.svg",
+  // },
 ];
 
 // To change the accepted files, change here -> schema.ts -> type-icons.tsx

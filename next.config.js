@@ -15,6 +15,11 @@ const nextConfig = {
       },
     ],
   },
+  webpack: (config, { buildId, dev, isServer, defaultLoaders, webpack }) => {
+    config.resolve.alias.canvas = false;
+    config.resolve.alias.encoding = false;
+    return config;
+  },
 };
 
 // Configuration object tells the next-pwa plugin

@@ -2,6 +2,7 @@ import { SearchCommand } from "@/components/shared/search-command";
 import SideNav from "./_components/side-nav";
 import { Header } from "./_components/header";
 import { Metadata } from "next";
+import BottomNav from "./_components/bottom-nav";
 
 export const metadata: Metadata = {
   title: "Dashboard",
@@ -25,6 +26,7 @@ export default function MainLayout({
           <div className="w-full z-[3]">{children}</div>
         </div>
       </main>
+      <BottomNav />
     </>
   );
 }

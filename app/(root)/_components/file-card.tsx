@@ -18,6 +18,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { defaultNumItems } from "@/constants";
 import { MotionDiv } from "@/components/shared/motion-div";
 import { typeIcons, typeLargeIcons } from "@/components/shared/type-icons";
+import PdfRenderer from "@/components/PDF/pdf-renderer";
 
 const variants = {
   hidden: { opacity: 0 },
@@ -70,6 +71,8 @@ export function FileCard({
               />
             </div>
           )}
+
+          {/* {file.type === "pdf" && <PdfRenderer url={file.fileId} />} */}
 
           {typeLargeIcons[file.type]}
         </CardContent>
